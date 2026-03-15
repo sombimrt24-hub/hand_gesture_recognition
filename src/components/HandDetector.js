@@ -1,3 +1,6 @@
+export default function HandDetector() {
+  console.log("HandDetector component is mounting..."); // ADD THIS
+  // ... rest of your code
 "use client";
 import React, { useRef, useEffect, useState } from 'react';
 import * as tf from '@tensorflow/tfjs';
