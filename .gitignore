@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+
+# Build outputs
+.next/
+out/
+build/
+
+# IDE/System files
+.vscode/
+.DS_Store
+*.log
