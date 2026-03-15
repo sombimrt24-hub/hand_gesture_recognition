@@ -1,4 +1,4 @@
-import HandDetector from '@/components/HandDetector';
+import HandDetector from '../components/HandDetector';
 
 export default function Home() {
   return (
