@@ -1,9 +1,11 @@
-export default function HandDetector() {
-  console.log("HandDetector component is mounting..."); // ADD THIS
-  // ... rest of your code
+
 "use client";
 import React, { useRef, useEffect, useState } from 'react';
 import * as tf from '@tensorflow/tfjs';
+
+export default function HandDetector() {
+  console.log("HandDetector component is mounting..."); // ADD THIS
+  // ... rest of your code
 
 // These labels must match the order of your training folders (00, 01, 02...)
 const GESTURE_LABELS = [
