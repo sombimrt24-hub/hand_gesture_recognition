@@ -14,21 +14,35 @@ export default function HandDetector() {
   const [gesture, setGesture] = useState("Initializing...");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadModel() {
-      try {
-        await tf.ready();
-        const loadedModel = await tf.loadLayersModel('/tfjs_model/model.json');
-        setModel(loadedModel);
-        setLoading(false);
-        setGesture("Show your hand");
-      } catch (err) {
-        console.error("Model failed to load:", err);
-        setGesture("Error loading model");
+ useEffect(() => {
+  // Always try to start the camera first
+  async function startCamera() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        console.log("Camera stream active.");
       }
+    } catch (err) {
+      console.error("Camera access denied:", err);
     }
-    loadModel();
-  }, []);
+  }
+
+  async function loadModel() {
+    try {
+      await tf.ready();
+      const loadedModel = await tf.loadLayersModel('/tfjs_model/model.json');
+      setModel(loadedModel);
+      setLoading(false);
+      console.log("Model loaded successfully!");
+    } catch (err) {
+      console.error("Model loading failed (404?):", err);
+    }
+  }
+
+  startCamera();
+  loadModel();
+}, []);
 
   const detect = async () => {
     if (model && videoRef.current && videoRef.current.readyState === 4) {
